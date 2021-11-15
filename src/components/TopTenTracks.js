@@ -13,7 +13,7 @@ const TopTenTracks = ({topTen}) => {
         <div>
             <h1 className="title">TopTenTracks</h1>
             {topTen.map(trackObj =>
-                <Link to={`/tracks/${trackObj.track.track_id}`} className="box" key={trackObj.track.track_id}>{trackObj.track.track_name}</Link>
+                <Link to={`/tracks/${trackObj.track.commontrack_id}`} className="box" key={trackObj.track.track_id}>{trackObj.track.track_name}</Link>
                 )}
             {/* <button onClick={()=>console.log(topTen)}>Click</button> */}
         </div>

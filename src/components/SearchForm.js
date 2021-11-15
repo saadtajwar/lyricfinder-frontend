@@ -30,7 +30,7 @@ const SearchForm = () => {
             </form>
             {tracksToShow && 
                 tracksToShow.map(tr => 
-                    <Link to={`/tracks/${tr.track.track_id}`} className="box" key={tr.track.track_id}>{tr.track.track_name}</Link>
+                    <Link to={`/tracks/${tr.track.commontrack_id}`} className="box" key={tr.track.track_id}>{tr.track.track_name}</Link>
                     )
             }
         </div>
