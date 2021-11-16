@@ -8,7 +8,7 @@ const Header = () => {
                 <Link to='/' className="title">LyricFinder</Link>
             </div>
             <div className="box">
-                <Link to='/search' className="title">Search for Tracks by Artist</Link>
+                <Link to='/search' className="title">Search for Tracks by Artist or Song Title</Link>
             </div>
         </div>
     )
