@@ -21,7 +21,7 @@ const Header = () => {
             }
         }
         const setDisplayRegister = () => {
-            if (location === '/register') {
+            if (location === '/register' || location === '/login') {
                 setRegisterVisibility(false);
             } else {
                 setRegisterVisibility(true);

@@ -7,7 +7,7 @@ const Notification = ({message}) => {
     }
 
     return (
-        <div className="notification is-primary is-light">
+        <div className={`notification ${message.includes('error') ? "is-danger" : "is-primary"} is-light`} >
             {message}
         </div>
     )

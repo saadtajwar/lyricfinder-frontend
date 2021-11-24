@@ -4,8 +4,9 @@ import TopTenTracks from './components/TopTenTracks'
 import SingleTrack from './components/SingleTrack'
 import Search from './components/Search'
 import Header from './components/Header'
-import Register from './components/Register'
+import RegisterForm from './components/RegisterForm'
 import Notification from './components/Notification'
+import LoginForm from './components/LoginForm'
 import {BrowserRouter as Router, Link, Routes, Route} from 'react-router-dom'
 
 const App = () => {
@@ -27,7 +28,8 @@ const App = () => {
       <Notification message={notif} />
       <Header />
       <Routes>
-        <Route path='/register' element={<Register setNotif={setNotif} />} />
+        <Route path='/login' element={<LoginForm />} />
+        <Route path='/register' element={<RegisterForm setNotif={setNotif} />} />
         <Route path='/search' element={<Search />} />
         <Route path='/tracks/:id' element={<SingleTrack topTen={topTen} />} />
         <Route path='/' element={<TopTenTracks topTen={topTen} />} />
