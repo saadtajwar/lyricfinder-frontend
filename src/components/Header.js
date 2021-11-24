@@ -10,6 +10,9 @@ const Header = () => {
             <div className="box">
                 <Link to='/search' className="title">Search for Tracks by Artist or Song Title</Link>
             </div>
+            <div className="box">
+                <Link to='/register' className="title">Register</Link>
+            </div>
         </div>
     )
 }

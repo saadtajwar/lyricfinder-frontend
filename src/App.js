@@ -4,6 +4,7 @@ import TopTenTracks from './components/TopTenTracks'
 import SingleTrack from './components/SingleTrack'
 import Search from './components/Search'
 import Header from './components/Header'
+import Register from './components/Register'
 import {BrowserRouter as Router, Link, Routes, Route} from 'react-router-dom'
 
 const App = () => {
@@ -18,11 +19,13 @@ const App = () => {
     }, [])
 
 
+
   return (
     <Router>
       <Header />
       <Routes>
-        <Route path='search' element={<Search />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/search' element={<Search />} />
         <Route path='/tracks/:id' element={<SingleTrack topTen={topTen} />} />
         <Route path='/' element={<TopTenTracks topTen={topTen} />} />
       </Routes>
