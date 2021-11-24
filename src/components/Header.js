@@ -6,7 +6,7 @@ const Header = () => {
     const [displayOrNot, setDisplayOrNot] = useState(true);
 
     const visible = { display: displayOrNot ? "" : "none"};
-    console.log(displayOrNot);
+    console.log('test');
 
     useEffect(()=> {
         const setDisplaySearch = () => {
