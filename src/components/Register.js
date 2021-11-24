@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import userService from '../services/users'
 import axios from 'axios'
 
 const Register = () => {
@@ -13,8 +14,8 @@ const Register = () => {
             name,
             password
         }
-        const newUser = await axios.post('http://localhost:8008/api/users', user);
-        console.log(newUser.data);
+        const newUser = await userService.createNew(user);
+        console.log(newUser);
         setName('');
         setUsername('');
         setPassword('');
