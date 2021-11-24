@@ -5,10 +5,12 @@ import SingleTrack from './components/SingleTrack'
 import Search from './components/Search'
 import Header from './components/Header'
 import Register from './components/Register'
+import Notification from './components/Notification'
 import {BrowserRouter as Router, Link, Routes, Route} from 'react-router-dom'
 
 const App = () => {
   const [topTen, setTopTen] = useState(null);
+  const [notif, setNotif] = useState(null);
 
   useEffect(()=> {
       const getTopTen = async () => {
@@ -22,9 +24,10 @@ const App = () => {
 
   return (
     <Router>
+      <Notification message={notif} />
       <Header />
       <Routes>
-        <Route path='/register' element={<Register />} />
+        <Route path='/register' element={<Register setNotif={setNotif} />} />
         <Route path='/search' element={<Search />} />
         <Route path='/tracks/:id' element={<SingleTrack topTen={topTen} />} />
         <Route path='/' element={<TopTenTracks topTen={topTen} />} />

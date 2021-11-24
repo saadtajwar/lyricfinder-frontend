@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import userService from '../services/users'
 import axios from 'axios'
 
-const Register = () => {
+const Register = ({setNotif}) => {
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
