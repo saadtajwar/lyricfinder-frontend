@@ -2,21 +2,33 @@ import React, {useEffect, useState} from 'react'
 import {Link, useLocation} from 'react-router-dom'
 
 const Header = () => {
-    const location = useLocation().pathname;
-    const [displayOrNot, setDisplayOrNot] = useState(true);
 
-    const visible = { display: displayOrNot ? "" : "none"};
-    console.log('test');
+    // TODO: Refactor visibility to remove redundant code
+
+    const location = useLocation().pathname;
+    const [displaySearchOrNot, setDisplaySearchOrNot] = useState(true);
+    const [registerVisibility, setRegisterVisibility] = useState(true);
+
+    const searchVisible = { display: displaySearchOrNot ? "" : "none"};
+    const registerVisible = { display: registerVisibility ? "" : "none"};
 
     useEffect(()=> {
         const setDisplaySearch = () => {
             if (location === '/search') {
-                setDisplayOrNot(false);
+                setDisplaySearchOrNot(false);
             } else {
-                setDisplayOrNot(true);
+                setDisplaySearchOrNot(true);
+            }
+        }
+        const setDisplayRegister = () => {
+            if (location === '/register') {
+                setRegisterVisibility(false);
+            } else {
+                setRegisterVisibility(true);
             }
         }
         setDisplaySearch();
+        setDisplayRegister();
     }, [location])
     
     return (
@@ -24,10 +36,10 @@ const Header = () => {
             <div className="box">
                 <Link to='/' className="title">LyricFinder</Link>
             </div>
-            <div className="box" style={visible}>
+            <div className="box" style={searchVisible}>
                 <Link to='/search' className="title">Search for Tracks by Artist or Song Title</Link>
             </div>
-            <div className="box">
+            <div className="box" style={registerVisible} >
                 <Link to='/register' className="title">Register</Link>
             </div>
         </div>
