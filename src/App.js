@@ -7,6 +7,7 @@ import Header from './components/Header'
 import RegisterForm from './components/RegisterForm'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
+import LogoutButton from './components/LogoutButton'
 import {BrowserRouter as Router, Link, Routes, Route} from 'react-router-dom'
 
 const App = () => {
@@ -22,12 +23,22 @@ const App = () => {
       getTopTen();
     }, [])
 
+    useEffect(()=> {
+      const loggedUser = window.localStorage.getItem('loggedUser');
+      if (loggedUser) {
+        const existingUser = JSON.parse(loggedUser);
+        setUser(existingUser);
+      }
+    }, [])
+
+    console.log('lol', user);
+
 
 
   return (
     <Router>
       <Notification message={notif} />
-      <Header />
+      <Header user={user} />
       <Routes>
         <Route path='/login' element={<LoginForm user={user} setUser={setUser} setNotif={setNotif} />} />
         <Route path='/register' element={<RegisterForm setNotif={setNotif} />} />
@@ -35,6 +46,7 @@ const App = () => {
         <Route path='/tracks/:id' element={<SingleTrack topTen={topTen} />} />
         <Route path='/' element={<TopTenTracks topTen={topTen} />} />
       </Routes>
+      <LogoutButton setUser={setUser} user={user} />
     </Router>
   )
 }

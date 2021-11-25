@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
 import loginService from '../services/login'
+import {useNavigate} from 'react-router-dom'
 
 const LoginForm = ({user, setUser, setNotif}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     if (user) {
         return (
@@ -20,13 +22,15 @@ const LoginForm = ({user, setUser, setNotif}) => {
             }
             const loggedUser = await loginService.login(attemptedUser);
             setUser(loggedUser);
+            window.localStorage.setItem('loggedUser', JSON.stringify(loggedUser));
             setNotif(`${username} successfully logged in!`);
             setTimeout(() => {
                 setNotif(null);
             }, 5000);
             console.log(loggedUser);
             setUsername('');
-            setPassword('');    
+            setPassword('');
+            navigate('/')
         } catch (error) {
             setNotif('error: Invalid credentials');
             setTimeout(() => {

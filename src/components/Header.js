@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from 'react'
 import {Link, useLocation} from 'react-router-dom'
 
-const Header = () => {
+const Header = ({user}) => {
 
     // TODO: Refactor visibility to remove redundant code
 
     const location = useLocation().pathname;
     const [displaySearchOrNot, setDisplaySearchOrNot] = useState(true);
     const [registerVisibility, setRegisterVisibility] = useState(true);
+    const [loginVisibility, setLoginVisibility] = useState(true);
 
     const searchVisible = { display: displaySearchOrNot ? "" : "none"};
     const registerVisible = { display: registerVisibility ? "" : "none"};
+    const loginVisible = { display: loginVisibility ? "" : "none"};
 
     useEffect(()=> {
         const setDisplaySearch = () => {
@@ -21,15 +23,23 @@ const Header = () => {
             }
         }
         const setDisplayRegister = () => {
-            if (location === '/register' || location === '/login') {
+            if (location === '/register' || user) {
                 setRegisterVisibility(false);
             } else {
                 setRegisterVisibility(true);
             }
         }
+        const setDisplayLogin = () => {
+            if (location === '/login' || user) {
+                setLoginVisibility(false);
+            } else {
+                setLoginVisibility(true);
+            }
+        }
         setDisplaySearch();
         setDisplayRegister();
-    }, [location])
+        setDisplayLogin();
+    }, [location, user])
     
     return (
         <div>
@@ -41,6 +51,9 @@ const Header = () => {
             </div>
             <div className="box" style={registerVisible} >
                 <Link to='/register' className="title">Register</Link>
+            </div>
+            <div className="box" style={loginVisible} >
+                <Link to='/login' className="title">Login</Link>
             </div>
         </div>
     )
