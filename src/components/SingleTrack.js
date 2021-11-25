@@ -35,11 +35,6 @@ const SingleTrack = ({user, setUser}) => {
         setUser(newUser);
     }
 
-    // const findSong = () => {
-    //     const foundSong = user.songs.find(song => song.commontrack_id == trackObj.message.body.track.commontrack_id);
-    //     if (foundSong)
-    // }
-
     
     return (
         <div className="box">

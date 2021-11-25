@@ -8,6 +8,8 @@ import RegisterForm from './components/RegisterForm'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import LogoutButton from './components/LogoutButton'
+import UserInfo from './components/UserInfo'
+import ViewProfileButton from './components/ViewProfileButton'
 import {BrowserRouter as Router, Link, Routes, Route} from 'react-router-dom'
 
 const App = () => {
@@ -40,6 +42,7 @@ const App = () => {
       <Notification message={notif} />
       <Header user={user} />
       <Routes>
+        <Route path='/users/:id' element={<UserInfo user={user} />} />
         <Route path='/login' element={<LoginForm user={user} setUser={setUser} setNotif={setNotif} />} />
         <Route path='/register' element={<RegisterForm setNotif={setNotif} />} />
         <Route path='/search' element={<Search />} />
@@ -47,6 +50,10 @@ const App = () => {
         <Route path='/' element={<TopTenTracks topTen={topTen} />} />
       </Routes>
       <LogoutButton setUser={setUser} user={user} />
+      <ViewProfileButton user={user} />
+      {/* {user && 
+        <Link to={`/users/${user.id}`}>View My Profile</Link>
+      } */}
     </Router>
   )
 }
