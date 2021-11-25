@@ -1,33 +1,56 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
+import songService from '../services/songs'
 
-const SingleTrack = ({topTen}) => {
+const SingleTrack = ({user, setUser}) => {
     const id = useParams().id;
     const [trackObj, setTrackObj] = useState(null);
+    const [disabledButton, setDisabledButton] = useState(false);
 
     useEffect(()=>{
         axios.get(`https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.get?commontrack_id=${id}&apikey=${process.env.REACT_APP_API_KEY}`).then(res => setTrackObj(res.data));
-        console.log(trackObj)
     }, [id])
+
+    useEffect(()=> {
+        if (trackObj && trackObj.message.body.length > 0) {
+            const foundSong = user.songs.find(song => song.commontrack_id == trackObj.message.body.track.commontrack_id);
+            if (foundSong) {
+                setDisabledButton(true);
+            }
+        }
+    }, [user, trackObj])
 
     if (!trackObj || trackObj.message.body.length === 0) {
         return null
     }
 
-    // const test = () => {
-    //     console.log(id);
-    //     axios.get(`https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.get?commontrack_id=5920049&apikey=${process.env.REACT_APP_API_KEY}`).then(res => console.log(res.data));
+    const handleSave = async () => {
+        const saveObj = {
+            commontrack_id: trackObj.message.body.track.commontrack_id,
+            track_name: trackObj.message.body.track.track_name,
+            userId: user.id
+        };
+        const newUser = await songService.saveSong(saveObj);
+        setUser(newUser);
+    }
+
+    // const findSong = () => {
+    //     const foundSong = user.songs.find(song => song.commontrack_id == trackObj.message.body.track.commontrack_id);
+    //     if (foundSong)
     // }
+
     
     return (
         <div className="box">
             <h1 className="title">Song Information</h1>
             <p>Track name: {trackObj.message.body.track.track_name}</p>
             <p>Songwriter: {trackObj.message.body.track.artist_name}</p>
-            {/* View
-            <button onClick={()=>console.log(trackObj)}>Click</button>
-            <button onClick={test}>Test</button> */}
+            {user &&
+            <> 
+            <button disabled={setDisabledButton ? "true" : ""} onClick={handleSave}>Save to favorites</button>
+            </>
+            }
         </div>
     )
 }

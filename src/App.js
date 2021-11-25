@@ -43,7 +43,7 @@ const App = () => {
         <Route path='/login' element={<LoginForm user={user} setUser={setUser} setNotif={setNotif} />} />
         <Route path='/register' element={<RegisterForm setNotif={setNotif} />} />
         <Route path='/search' element={<Search />} />
-        <Route path='/tracks/:id' element={<SingleTrack topTen={topTen} />} />
+        <Route path='/tracks/:id' element={<SingleTrack user={user} setUser={setUser} />} />
         <Route path='/' element={<TopTenTracks topTen={topTen} />} />
       </Routes>
       <LogoutButton setUser={setUser} user={user} />
