@@ -17,6 +17,8 @@ const SingleTrack = ({user, setUser}) => {
             const foundSong = user.songs.find(song => song.commontrack_id == trackObj.message.body.track.commontrack_id);
             if (foundSong) {
                 setDisabledButton(true);
+            } else {
+                setDisabledButton(false);
             }
         }
     }, [user, trackObj])
